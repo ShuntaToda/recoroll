@@ -1,7 +1,7 @@
 import React from "react";
 import { MdAdd } from "react-icons/md";
-
 import { IconContext } from "react-icons";
+
 export const CreateProject = () => {
     return (
         <div className="bg-gradient-to-br from-yellow-300 to-orange-400 h-40 flex flex-col justify-center items-center">

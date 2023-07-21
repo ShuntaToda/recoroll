@@ -53,7 +53,10 @@ export const DashboardPage = () => {
             <CreateProject></CreateProject>
             <main className="pt-10 flex flex-wrap justify-around">
                 {projects.map((project, index) => (
-                    <ProjectCard key={project.id}></ProjectCard>
+                    <ProjectCard
+                        key={project.id}
+                        project={project}
+                    ></ProjectCard>
                 ))}
             </main>
         </div>
