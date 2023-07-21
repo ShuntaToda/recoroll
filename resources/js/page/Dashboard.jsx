@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import { getAuthURL } from "../api/authAPI";
 import { setUserContext, userContext } from "../provider/user";
 import { Navigate, useNavigate } from "react-router-dom";
 
@@ -8,11 +7,21 @@ import { SideMenu } from "../components/SideMenu";
 import { Logout } from "../components/Logout";
 import { CreateProject } from "../components/CreateProject";
 import { ProjectCard } from "../components/ProjectCard";
+import { getProjects } from "../api/projectAPI";
 
 export const DashboardPage = () => {
     const user = useContext(userContext);
     const [isOpen, setIsOpen] = useState(false);
+    const [projects, setProjects] = useState([]);
 
+    useEffect(() => {
+        const get = async () => {
+            const gotProjects = await getProjects();
+            setProjects(gotProjects);
+            console.log(gotProjects);
+        };
+        get();
+    }, []);
     return (
         <div>
             <div className="flex justify-between items-center relative">
@@ -43,11 +52,9 @@ export const DashboardPage = () => {
             </div>
             <CreateProject></CreateProject>
             <main className="pt-10 flex flex-wrap justify-around">
-                <ProjectCard></ProjectCard>
-                <ProjectCard></ProjectCard>
-                <ProjectCard></ProjectCard>
-                <ProjectCard></ProjectCard>
-                <ProjectCard></ProjectCard>
+                {projects.map((project, index) => (
+                    <ProjectCard key={project.id}></ProjectCard>
+                ))}
             </main>
         </div>
     );
