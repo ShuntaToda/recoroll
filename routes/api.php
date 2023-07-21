@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\OAuth\LoginController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -27,3 +28,6 @@ Route::get('/user', function (Request $request) {
 
 Route::get('/auth/google', [LoginController::class, "redirectToProvider"]);
 Route::post('/auth/google/callback', [LoginController::class, "handleProviderCallback"]);
+
+Route::get('/project', [ProjectController::class, "index"])->middleware('auth:sanctum');
+Route::post('/project', [ProjectController::class, "store"])->middleware('auth:sanctum');
