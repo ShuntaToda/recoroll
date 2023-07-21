@@ -1,20 +1,12 @@
+body {
+    overflow-x: hidden;
+}
+
 .gradation-text {
     background: linear-gradient(to right bottom, #ff652a, #ffdc00);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-
-// .gradation-border {
-//     border-radius: 30px;
-//     background-image: linear-gradient(to right bottom, #ff652a, #ffdc00);
-//     > div {
-//         border: 8px solid transparent;
-//         background-color: white;
-//         border-radius: 30px;
-//         background-origin: border-box; /* 背景の基準位置はボーダーも含める */
-//         background-clip: border-box;
-//     }
-// }
 
 .gradation-border {
     position: relative;
