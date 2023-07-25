@@ -2,33 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Project;
+use App\Models\Block;
 use Illuminate\Http\Request;
 
-class ProjectController extends Controller
+class BlockController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index($project_id)
     {
-        $projects = Project::where("user_id", $request->user()->id)->get();
-
-        return response()->json($projects);
+        $blocks = Block::where("project_id", $project_id)->get();
+        return response()->json($blocks);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $project_id)
     {
-        $user = $request->user();
-        $project = Project::create([
-            "name" => $request->name,
-            "user_id" => $user->id,
+        $block = Block::create([
+            "project_id" => $project_id,
+            "contents" => json_encode([]),
+            "order" => $request->order,
         ]);
 
-        return response()->json($project);
+        return response()->json($block);
     }
 
     /**

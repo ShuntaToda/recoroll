@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { setUserContext, userContext } from "../provider/user";
-import { Navigate, useNavigate } from "react-router-dom";
 
 import logo from "../../images/logos/logo.svg";
 import { SideMenu } from "../components/SideMenu";
@@ -50,7 +49,7 @@ export const DashboardPage = () => {
                     </footer>
                 </SideMenu>
             </div>
-            <CreateProject></CreateProject>
+            <CreateProject projects={projects}></CreateProject>
             <main className="pt-10 flex flex-wrap justify-around">
                 {projects.map((project, index) => (
                     <ProjectCard

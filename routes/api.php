@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlockController;
 use App\Http\Controllers\OAuth\LoginController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Http\Request;
@@ -31,3 +32,6 @@ Route::post('/auth/google/callback', [LoginController::class, "handleProviderCal
 
 Route::get('/project', [ProjectController::class, "index"])->middleware('auth:sanctum');
 Route::post('/project', [ProjectController::class, "store"])->middleware('auth:sanctum');
+
+Route::get('/block/{project_id}', [BlockController::class, "index"])->middleware('auth:sanctum');
+Route::post('/block/{project_id}', [BlockController::class, "store"])->middleware('auth:sanctum');

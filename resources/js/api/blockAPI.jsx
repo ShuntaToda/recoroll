@@ -1,6 +1,6 @@
-export const getProjects = async () => {
+export const getBlocksApi = async (projectId) => {
     try {
-        const { data } = await axios.get("/api/project", {
+        const { data } = await axios.get(`/api/block/${projectId}`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
@@ -12,11 +12,11 @@ export const getProjects = async () => {
         return null;
     }
 };
-export const storeProject = async (name) => {
+export const storeBlockApi = async (projectId, order) => {
     try {
         const { data } = await axios.post(
-            "/api/project",
-            { name: name },
+            `/api/block/${projectId}`,
+            { order: order },
             {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
