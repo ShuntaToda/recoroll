@@ -7,6 +7,7 @@ import { Logout } from "../components/Logout";
 import { CreateProject } from "../components/CreateProject";
 import { ProjectCard } from "../components/ProjectCard";
 import { getProjects } from "../api/projectAPI";
+import { Link } from "react-router-dom";
 
 export const DashboardPage = () => {
     const user = useContext(userContext);
@@ -52,10 +53,15 @@ export const DashboardPage = () => {
             <CreateProject projects={projects}></CreateProject>
             <main className="pt-10 flex flex-wrap justify-around">
                 {projects.map((project, index) => (
-                    <ProjectCard
-                        key={project.id}
-                        project={project}
-                    ></ProjectCard>
+                    <Link
+                        to={`project/${project.id}`}
+                        state={{ project: project }}
+                    >
+                        <ProjectCard
+                            key={project.id}
+                            project={project}
+                        ></ProjectCard>
+                    </Link>
                 ))}
             </main>
         </div>

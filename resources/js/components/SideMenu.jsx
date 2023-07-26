@@ -4,16 +4,17 @@ import { BiMenu } from "react-icons/bi";
 import { GrFormClose } from "react-icons/gr";
 import { userContext } from "../provider/user";
 
-export const SideMenu = ({ isOpen, setIsOpen, children }) => {
-    const user = useContext(userContext);
+export const SideMenu = ({ isOpen, setIsOpen, white, children }) => {
     const handleOpen = () => {
         setIsOpen((prev) => !prev);
     };
     return (
         <>
-            <IconContext.Provider value={{ size: "40px", color: "#444" }}>
+            <IconContext.Provider
+                value={{ size: "40px", color: white ? "#fff" : "#444" }}
+            >
                 <div className="px-2" onClick={handleOpen}>
-                    {isOpen ? <GrFormClose></GrFormClose> : <BiMenu></BiMenu>}
+                    <BiMenu></BiMenu>
                 </div>
             </IconContext.Provider>
             <div className="">
