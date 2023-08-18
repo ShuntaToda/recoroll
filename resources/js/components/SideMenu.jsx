@@ -1,8 +1,6 @@
 import React, { useContext } from "react";
 import { IconContext } from "react-icons";
 import { BiMenu } from "react-icons/bi";
-import { GrFormClose } from "react-icons/gr";
-import { userContext } from "../provider/user";
 
 export const SideMenu = ({ isOpen, setIsOpen, white, children }) => {
     const handleOpen = () => {
@@ -27,7 +25,7 @@ export const SideMenu = ({ isOpen, setIsOpen, white, children }) => {
                       inset-0 w-screen h-screen bg-gray-700  transition-opacity`}
                 ></div>
                 <div
-                    className={`absolute ${
+                    className={`absolute z-50 ${
                         isOpen ? "translate-x-0" : "translate-x-full"
                     } min-h-screen top-0 right-0 w-2/3 bg-white transition-transform flex flex-col`}
                 >

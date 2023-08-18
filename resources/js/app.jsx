@@ -51,31 +51,33 @@ const App = () => {
     };
 
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route
-                    path="/"
-                    element={
-                        <RouteAuthGuard
-                            component={<DashboardPage />}
-                        ></RouteAuthGuard>
-                    }
-                ></Route>
-                <Route
-                    path="/project/:id"
-                    element={
-                        <RouteAuthGuard
-                            component={<Project />}
-                        ></RouteAuthGuard>
-                    }
-                ></Route>
-                <Route
-                    path="/auth/google/callback"
-                    element={<CallBackPage />}
-                ></Route>
-                <Route path="/login" element={<LoginPage />}></Route>
-            </Routes>
-        </BrowserRouter>
+        <div className="overflow-x-hidden min-h-screen">
+            <BrowserRouter>
+                <Routes>
+                    <Route
+                        path="/"
+                        element={
+                            <RouteAuthGuard
+                                component={<DashboardPage />}
+                            ></RouteAuthGuard>
+                        }
+                    ></Route>
+                    <Route
+                        path="/project/:id"
+                        element={
+                            <RouteAuthGuard
+                                component={<Project />}
+                            ></RouteAuthGuard>
+                        }
+                    ></Route>
+                    <Route
+                        path="/auth/google/callback"
+                        element={<CallBackPage />}
+                    ></Route>
+                    <Route path="/login" element={<LoginPage />}></Route>
+                </Routes>
+            </BrowserRouter>
+        </div>
     );
 };
 

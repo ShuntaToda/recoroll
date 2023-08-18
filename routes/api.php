@@ -31,8 +31,9 @@ Route::get('/auth/google', [LoginController::class, "redirectToProvider"]);
 Route::post('/auth/google/callback', [LoginController::class, "handleProviderCallback"]);
 
 Route::get('/project', [ProjectController::class, "index"])->middleware('auth:sanctum');
-Route::get('/project/{id}', [ProjectController::class, "show"])->middleware('auth:sanctum');
 Route::post('/project', [ProjectController::class, "store"])->middleware('auth:sanctum');
+Route::get('/project/{id}', [ProjectController::class, "show"])->middleware('auth:sanctum');
+Route::delete('/project/{id}', [ProjectController::class, "destroy"])->middleware('auth:sanctum');
 
 Route::get('/block/{project_id}', [BlockController::class, "index"])->middleware('auth:sanctum');
 Route::post('/block/{project_id}', [BlockController::class, "store"])->middleware('auth:sanctum');

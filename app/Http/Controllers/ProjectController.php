@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Block;
 use App\Models\Project;
 use Illuminate\Http\Request;
 
@@ -54,6 +55,11 @@ class ProjectController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $project = Project::find($id);
+
+        Block::where("project_id", $project->id)->delete();
+
+        $project->delete();
+        return true;
     }
 }

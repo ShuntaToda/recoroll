@@ -14,13 +14,13 @@ export const DashboardPage = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [projects, setProjects] = useState([]);
 
+    const update = async () => {
+        const gotProjects = await getProjects();
+        setProjects(gotProjects);
+        console.log(gotProjects);
+    };
     useEffect(() => {
-        const get = async () => {
-            const gotProjects = await getProjects();
-            setProjects(gotProjects);
-            console.log(gotProjects);
-        };
-        get();
+        update();
     }, []);
     return (
         <div>
@@ -53,15 +53,11 @@ export const DashboardPage = () => {
             <CreateProject projects={projects}></CreateProject>
             <main className="pt-10 flex flex-wrap justify-around">
                 {projects.map((project, index) => (
-                    <Link
-                        to={`project/${project.id}`}
-                        state={{ project: project }}
-                    >
-                        <ProjectCard
-                            key={project.id}
-                            project={project}
-                        ></ProjectCard>
-                    </Link>
+                    <ProjectCard
+                        key={project.id}
+                        project={project}
+                        updateProject={update}
+                    ></ProjectCard>
                 ))}
             </main>
         </div>

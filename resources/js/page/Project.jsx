@@ -3,6 +3,8 @@ import { useLocation, useParams } from "react-router-dom";
 import { getBlocksApi, storeBlockApi } from "../api/blockAPI";
 import { ProjectHeader } from "../components/ProjectHeader";
 import { getProject } from "../api/projectAPI";
+import { ProjectMain } from "../components/ProjectMain";
+import { ProjectFooter } from "../components/ProjectFooter";
 
 export const Project = () => {
     const params = useParams();
@@ -18,7 +20,7 @@ export const Project = () => {
     useEffect(async () => {
         console.log(params);
         const gotBlocks = await getBlocksApi(params.id);
-        if (gotBlocks.length) {
+        if (gotBlocks.length !== 0) {
             setBlocks(gotBlocks);
         } else {
             setBlocks(createBlock());
@@ -35,13 +37,14 @@ export const Project = () => {
         }
     }, []);
 
-    useEffect(() => {
-        console.log(blocks);
-    }, [blocks]);
     return (
         <div>
             {project !== undefined && (
-                <ProjectHeader project={project}></ProjectHeader>
+                <div className="relative">
+                    <ProjectHeader project={project}></ProjectHeader>
+                    <ProjectMain blocks={blocks}></ProjectMain>
+                    <ProjectFooter></ProjectFooter>
+                </div>
             )}
         </div>
     );

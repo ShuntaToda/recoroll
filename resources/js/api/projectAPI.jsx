@@ -46,3 +46,18 @@ export const getProject = async (id) => {
         return null;
     }
 };
+
+export const deleteProject = async (id) => {
+    try {
+        const { data } = await axios.delete(`/api/project/${id}`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        });
+        console.log(data);
+        return data;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+};
