@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { getBlocksApi, storeBlockApi } from "../api/blockAPI";
 import { ProjectHeader } from "../components/ProjectHeader";
+import { getProject } from "../api/projectAPI";
 
 export const Project = () => {
     const params = useParams();
@@ -14,26 +15,23 @@ export const Project = () => {
         return createdBlock;
     };
 
-    const getBlocks = () => {};
-
-    useEffect(() => {
+    useEffect(async () => {
         console.log(params);
-        const getBlocks = async () => {
-            return await getBlocksApi();
-        };
-        const gotBlocks = getBlocks(params.id);
+        const gotBlocks = await getBlocksApi(params.id);
         if (gotBlocks.length) {
             setBlocks(gotBlocks);
         } else {
             setBlocks(createBlock());
         }
-        const getProject = async () => {};
 
-        if (state.project) {
+        console.log(state, params);
+        if (state) {
             setProject(state.project);
         } else {
             // projectを取得する処理
-            setProject({ name: "aaa" });
+            const gotproject = await getProject(params.id);
+            console.log(gotproject);
+            setProject(gotproject);
         }
     }, []);
 

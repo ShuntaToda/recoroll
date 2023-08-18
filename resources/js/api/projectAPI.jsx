@@ -34,7 +34,7 @@ export const storeProject = async (name) => {
 
 export const getProject = async (id) => {
     try {
-        const { data } = await axios.get(`/api/project/${}`, {
+        const { data } = await axios.get(`/api/project/${id}`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
