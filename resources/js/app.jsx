@@ -16,6 +16,8 @@ import { useAuthUser } from "./hooks/useAuth";
 import { CallBackPage } from "./page/CallBackPage";
 import { Loading } from "./page/Loading";
 import { Project } from "./page/Project";
+import { ProjectProvider } from "./provider/project";
+import { BlocksProvider } from "./provider/blocks";
 
 const App = () => {
     const [loginUser, setLoginUser] = useState(null);
@@ -66,7 +68,13 @@ const App = () => {
                         path="/project/:id"
                         element={
                             <RouteAuthGuard
-                                component={<Project />}
+                                component={
+                                    <ProjectProvider>
+                                        <BlocksProvider>
+                                            <Project />
+                                        </BlocksProvider>
+                                    </ProjectProvider>
+                                }
                             ></RouteAuthGuard>
                         }
                     ></Route>

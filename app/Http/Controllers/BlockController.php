@@ -21,6 +21,7 @@ class BlockController extends Controller
      */
     public function store(Request $request, $project_id)
     {
+        // return response()->json($project_id);
         $block = Block::create([
             "project_id" => $project_id,
             "contents" => json_encode([]),
