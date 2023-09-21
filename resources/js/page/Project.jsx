@@ -26,8 +26,7 @@ export const Project = () => {
     // };
 
     useEffect(() => {
-        console.log(params);
-        console.log(setProject);
+        // console.log(params);
 
         const fetch = async () => {
             const gotBlocks = await getBlocksApi(params.id);
@@ -40,7 +39,7 @@ export const Project = () => {
             } else {
                 // projectを取得する処理
                 const gotproject = await getProject(params.id);
-                console.log(gotproject);
+                // console.log(gotproject);
                 setProject(gotproject);
             }
         };
