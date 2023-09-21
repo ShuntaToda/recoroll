@@ -35,7 +35,6 @@ export const Project = () => {
                 setBlocks(gotBlocks);
             }
 
-            console.log(state.project, params);
             if (state) {
                 setProject(state.project);
             } else {
