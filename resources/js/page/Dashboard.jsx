@@ -5,7 +5,7 @@ import logo from "../../images/logos/logo.svg";
 import { SideMenu } from "../components/SideMenu";
 import { Logout } from "../components/Logout";
 import { CreateProject } from "../components/CreateProject";
-import { ProjectCard } from "../components/ProjectCard";
+import { ProjectCard } from "../components/project/ProjectCard";
 import { getProjects } from "../api/projectAPI";
 import { Link } from "react-router-dom";
 

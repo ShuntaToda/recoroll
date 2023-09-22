@@ -2,7 +2,7 @@ import React from "react";
 import { IconContext } from "react-icons";
 import { AiFillPicture } from "react-icons/ai";
 import { BsArrowLeftShort, BsArrowRightShort } from "react-icons/bs";
-import { AddText } from "./project/AddText";
+import { AddText } from "./AddText";
 export const ProjectFooter = () => {
     return (
         <div className="fixed flex justify-around items-center bottom-0  w-full m-0 h-16 bg-gradient-to-b to-gray-300 from-transparent">

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { storeBlockApi } from "../api/blockAPI";
-import { projectContext, setProjectContext } from "../provider/project";
-import { blocksContext, setBlocksContext } from "../provider/blocks";
+import { storeBlockApi } from "../../api/blockAPI";
+import { projectContext, setProjectContext } from "../../provider/project";
+import { blocksContext, setBlocksContext } from "../../provider/blocks";
 
 export const ProjectAddBlock = () => {
     const project = useContext(projectContext);

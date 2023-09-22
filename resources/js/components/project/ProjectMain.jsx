@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ProjectAddBlock } from "./ProjectAddBlock";
-import { projectContext, setProjectContext } from "../provider/project";
-import { blocksContext, setBlocksContext } from "../provider/blocks";
+import { projectContext, setProjectContext } from "../../provider/project";
+import { blocksContext, setBlocksContext } from "../../provider/blocks";
+import { Block } from "./block/Block";
 
 export const ProjectMain = () => {
     const project = useContext(projectContext);
@@ -14,11 +15,7 @@ export const ProjectMain = () => {
     return (
         <div className="pb-10">
             {blocks.map((block, index) => (
-                <div
-                    key={block.id}
-                    style={{ height: "300px" }}
-                    className="bg-blue-200"
-                ></div>
+                <Block key={block.id} block={block} index={index}></Block>
             ))}
             <ProjectAddBlock
                 blocks={blocks}

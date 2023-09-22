@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { deleteProject } from "../api/projectAPI";
+import { deleteProject } from "../../api/projectAPI";
 
 export const ProjectCard = ({ project, updateProject }) => {
     const destroy = async () => {

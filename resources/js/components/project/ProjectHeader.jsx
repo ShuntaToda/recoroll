@@ -1,10 +1,11 @@
 import React, { useContext, useState } from "react";
 
-import logo from "../../images/logos/logo-white.svg";
+import logo from "../../../images/logos/logo-white.svg";
 import { HiOutlineShare } from "react-icons/hi";
 import { IconContext } from "react-icons";
-import { SideMenu } from "./SideMenu";
-import { userContext } from "../provider/user";
+import { SideMenu } from "../SideMenu";
+import { userContext } from "../../provider/user";
+
 export const ProjectHeader = ({ project }) => {
     const user = useContext(userContext);
     const [isOpen, setIsOpen] = useState(false);
