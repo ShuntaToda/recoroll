@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger("project_id");
             $table->json("contents");
+            $table->boolean("active");
             $table->unsignedBigInteger("order");
             $table->timestamps();
         });

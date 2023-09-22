@@ -24,7 +24,11 @@ class BlockController extends Controller
         // return response()->json($project_id);
         $block = Block::create([
             "project_id" => $project_id,
-            "contents" => json_encode([]),
+            "contents" => json_encode([
+                "texts" => [],
+                "photos" => [],
+            ]),
+            "active" => false,
             "order" => $request->order,
         ]);
 
@@ -42,16 +46,26 @@ class BlockController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $project_id, $block_id)
     {
-        //
+        $block = Block::find($block_id)->first();
+        $block->update([
+            "contents" => json_encode([
+                "texts" => $request->block->contents->texts,
+                "photos" => $request->block->contents->photos,
+            ]),
+            "order" => $request->block->order,
+        ]);
+
+        return response()->json($block);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($block_id)
     {
-        //
+        // return response()->json($block_id);
+        $block = Block::find($block_id)->delete();
     }
 }
