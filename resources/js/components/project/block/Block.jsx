@@ -6,6 +6,7 @@ export const Block = ({ block, index, blockMenuOpen }) => {
     const blockEl = useRef(null);
     const [isTouch, setIsTouch] = useState(false);
 
+    //アクティブにする処理
     const onActive = () => {
         setBlocks((prevBlock) => {
             prevBlock = prevBlock.map((block) => ({ ...block, active: false }));
@@ -14,15 +15,18 @@ export const Block = ({ block, index, blockMenuOpen }) => {
         });
     };
 
+    //長押しする際の処理
     const longTouch = (e) => {
         blockMenuOpen(e, index);
     };
+    //タッチを開始したときの処理
     const touchStart = () => {
         setIsTouch(true);
-        setTimeout(() => setIsTouch(false), 1000);
+        // 0.7秒の間setIsTouchをtrueにする
+        setTimeout(() => setIsTouch(false), 700);
     };
+    // タッチを終了したとき
     const touchEnd = (e) => {
-        console.log(e);
         if (!isTouch) {
             longTouch(e);
         }

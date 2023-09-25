@@ -63,9 +63,12 @@ class BlockController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($block_id)
+    public function destroy($block_id, $project_id)
     {
         // return response()->json($block_id);
         $block = Block::find($block_id)->delete();
+
+        $result_blocks = Block::where("project_id", $project_id)->get();
+        return $result_blocks;
     }
 }
