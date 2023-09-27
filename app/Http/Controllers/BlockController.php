@@ -36,7 +36,7 @@ class BlockController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $project_id, $block_id)
+    public function update(Request $request, $block_id)
     {
         $block = Block::find($block_id)->first();
         $block->update([

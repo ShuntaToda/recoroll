@@ -35,7 +35,7 @@ export const Block = ({ block, index, blockMenuOpen }) => {
         <div
             key={block.id}
             style={{ height: "300px" }}
-            className={`bg-blue-200 ${block.active && "bg-red-200"}`}
+            className={`bg-blue-200 ${block.active && "bg-red-200 "}`}
             ref={blockEl}
             onClick={onActive}
             onTouchStart={touchStart}

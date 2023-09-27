@@ -37,5 +37,5 @@ Route::delete('/project/{id}', [ProjectController::class, "destroy"])->middlewar
 
 Route::get('/block/{project_id}', [BlockController::class, "index"])->middleware('auth:sanctum');
 Route::post('/block/{project_id}', [BlockController::class, "store"])->middleware('auth:sanctum');
-Route::put('/block/{project_id}/{block_id}', [BlockController::class, "update"])->middleware('auth:sanctum');
+Route::put('/block/{block_id}', [BlockController::class, "update"])->middleware('auth:sanctum');
 Route::delete('/block/{block_id}/{project_id}', [BlockController::class, "destroy"])->middleware('auth:sanctum');
