@@ -24,7 +24,26 @@ export const getBlocksApi = async (projectId) => {
         return null;
     }
 };
-export const storeBlockApi = async (projectId, order) => {
+// export const storeBlockApi = async (projectId, order) => {
+//     try {
+//         const { data } = await axios.post(
+//             `/api/block/${projectId}`,
+//             { order: order },
+//             {
+//                 headers: {
+//                     Authorization: `Bearer ${localStorage.getItem("token")}`,
+//                     "Content-Type": "application/json",
+//                 },
+//             }
+//         );
+//         const result = { ...data, contents: JSON.parse(data.contents) };
+//         return result;
+//     } catch (error) {
+//         console.log(error);
+//         return null;
+//     }
+// };
+export const addBlockApi = async (projectId, order) => {
     try {
         const { data } = await axios.post(
             `/api/block/${projectId}`,
@@ -36,8 +55,8 @@ export const storeBlockApi = async (projectId, order) => {
                 },
             }
         );
-        const result = { ...data, contents: JSON.parse(data.contents) };
-        return result;
+        console.log(data);
+        return exchangeContent(data);
     } catch (error) {
         console.log(error);
         return null;
@@ -73,21 +92,6 @@ export const deleteBlockApi = async (blockId, projectId) => {
                 },
             }
         );
-        return exchangeContent(data);
-    } catch (error) {
-        console.log(error);
-        return null;
-    }
-};
-export const addBlockApi = async (projectId, order) => {
-    try {
-        const { data } = await axios.post(`/api/block/${projectId}/${order}`, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-                "Content-Type": "application/json",
-            },
-        });
-        console.log(data);
         return exchangeContent(data);
     } catch (error) {
         console.log(error);

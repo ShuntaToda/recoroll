@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import { getBlocksApi, storeBlockApi } from "../api/blockAPI";
+import { getBlocksApi } from "../api/blockAPI";
 import { ProjectHeader } from "../components/project/ProjectHeader";
 import { getProject } from "../api/projectAPI";
 import { ProjectMain } from "../components/project/ProjectMain";

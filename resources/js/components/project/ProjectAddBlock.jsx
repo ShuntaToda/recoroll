@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
-import { addBlockApi, storeBlockApi } from "../../api/blockAPI";
+import { addBlockApi } from "../../api/blockAPI";
 import { projectContext, setProjectContext } from "../../provider/project";
 import { blocksContext, setBlocksContext } from "../../provider/blocks";
 
 export const ProjectAddBlock = () => {
     const project = useContext(projectContext);
-    const setProject = useContext(setProjectContext);
     const blocks = useContext(blocksContext);
     const setBlocks = useContext(setBlocksContext);
+
     const storeBlock = async () => {
         const gotBlocks = await addBlockApi(project.id, blocks.length);
         setBlocks(gotBlocks);

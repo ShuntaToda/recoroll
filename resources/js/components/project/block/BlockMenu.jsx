@@ -25,6 +25,7 @@ export const BlockMenu = ({ blockMenuPosition }) => {
             (item) => item.active == true
         );
         const gotBlocks = await addBlockApi(project.id, selectedBlockIndex + 1);
+        setBlocks(gotBlocks);
     };
     return (
         <div

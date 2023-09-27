@@ -19,9 +19,9 @@ class BlockController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store($project_id, $order)
+    public function store(Request $request, $project_id)
     {
-        $blocks = Block::handleAdd($project_id, $order);
+        $blocks = Block::handleAdd($project_id, $request->order);
         return response()->json($blocks);
     }
 
