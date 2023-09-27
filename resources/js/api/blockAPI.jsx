@@ -62,15 +62,33 @@ export const updateBlockApi = async (projectId, block) => {
         return null;
     }
 };
-export const deleteBlockApi = async (block) => {
+export const deleteBlockApi = async (blockId, projectId) => {
     try {
-        const { data } = await axios.delete(`/api/block/${block.id}`, {
+        const { data } = await axios.delete(
+            `/api/block/${blockId}/${projectId}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    "Content-Type": "application/json",
+                },
+            }
+        );
+        return exchangeContent(data);
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+};
+export const addBlockApi = async (projectId, order) => {
+    try {
+        const { data } = await axios.post(`/api/block/${projectId}/${order}`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
                 "Content-Type": "application/json",
             },
         });
-        return data;
+        console.log(data);
+        return exchangeContent(data);
     } catch (error) {
         console.log(error);
         return null;

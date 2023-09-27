@@ -19,20 +19,10 @@ class BlockController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, $project_id)
+    public function store($project_id, $order)
     {
-        // return response()->json($project_id);
-        $block = Block::create([
-            "project_id" => $project_id,
-            "contents" => json_encode([
-                "texts" => [],
-                "photos" => [],
-            ]),
-            "active" => false,
-            "order" => $request->order,
-        ]);
-
-        return response()->json($block);
+        $blocks = Block::handleAdd($project_id, $order);
+        return response()->json($blocks);
     }
 
     /**
@@ -65,10 +55,8 @@ class BlockController extends Controller
      */
     public function destroy($block_id, $project_id)
     {
-        // return response()->json($block_id);
-        $block = Block::find($block_id)->delete();
-
-        $result_blocks = Block::where("project_id", $project_id)->get();
+        $result_blocks = Block::handleDelete($block_id, $project_id);
+        return response()->json($result_blocks);
         return $result_blocks;
     }
 }

@@ -1,28 +1,30 @@
 import React, { useContext, useEffect } from "react";
 import { blocksContext, setBlocksContext } from "../../../provider/blocks";
-import { deleteBlockApi } from "../../../api/blockAPI";
+import { addBlockApi, deleteBlockApi } from "../../../api/blockAPI";
+import { projectContext } from "../../../provider/project";
 
 export const BlockMenu = ({ blockMenuPosition }) => {
     const blocks = useContext(blocksContext);
     const setBlocks = useContext(setBlocksContext);
+    const project = useContext(projectContext);
 
     // ブロック削除処理
     const deleteBlock = async () => {
         // アクティブのブロックの取得
         const [selectedBlock] = blocks.filter((block) => block.active);
         // 削除されたブロック以外の設定
-        setBlocks((prevBlocks) => prevBlocks.filter((block) => !block.active));
         // 削除ブロックの更新
-        const gotBlocks = await deleteBlockApi(selectedBlock);
+        const gotBlocks = await deleteBlockApi(selectedBlock.id, project.id);
+        setBlocks(gotBlocks);
     };
 
     // ブロック追加処理
-    const addBlock = () => {
+    const addBlock = async () => {
         // アクティブのブロックのindex取得
         const selectedBlockIndex = blocks.findIndex(
             (item) => item.active == true
         );
-        console.log(selectedBlockIndex);
+        const gotBlocks = await addBlockApi(project.id, selectedBlockIndex + 1);
     };
     return (
         <div

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { storeBlockApi } from "../../api/blockAPI";
+import { addBlockApi, storeBlockApi } from "../../api/blockAPI";
 import { projectContext, setProjectContext } from "../../provider/project";
 import { blocksContext, setBlocksContext } from "../../provider/blocks";
 
@@ -9,8 +9,8 @@ export const ProjectAddBlock = () => {
     const blocks = useContext(blocksContext);
     const setBlocks = useContext(setBlocksContext);
     const storeBlock = async () => {
-        const gotBlocks = await storeBlockApi(project.id, blocks.length);
-        setBlocks([...blocks, gotBlocks]);
+        const gotBlocks = await addBlockApi(project.id, blocks.length);
+        setBlocks(gotBlocks);
     };
     return (
         <div className="flex justify-center">
