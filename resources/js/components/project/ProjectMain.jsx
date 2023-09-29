@@ -45,7 +45,7 @@ export const ProjectMain = () => {
                     blockMenuOpen={blockMenuOpen}
                     key={block.id}
                     block={block}
-                    index={index}
+                    blockIndex={index}
                 ></Block>
             ))}
             <ProjectAddBlock

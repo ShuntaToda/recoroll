@@ -44,15 +44,25 @@ export const addBlockApi = async (projectId, order) => {
     }
 };
 
-export const updateBlockApi = async (block) => {
+export const updateBlockApi = async (block, mode, props) => {
     try {
-        const { data } = await axios.put(`/api/block/${block.id}`, block, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-                "Content-Type": "application/json",
+        const { data } = await axios.put(
+            `/api/block/${block.id}`,
+            {
+                block: block,
+                texts: mode == "text" ? props : block.contents.texts,
+                photos: mode == "photo" ? props : block.contents.photos,
             },
-        });
-        return data;
+            {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    "Content-Type": "application/json",
+                },
+            }
+        );
+        const [result] = exchangeContent([data]);
+        console.log(result);
+        return result;
     } catch (error) {
         console.log(error);
         return null;

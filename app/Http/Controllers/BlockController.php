@@ -38,13 +38,12 @@ class BlockController extends Controller
      */
     public function update(Request $request, $block_id)
     {
-        $block = Block::find($block_id)->first();
+        $block = Block::find($block_id);
         $block->update([
             "contents" => json_encode([
-                "texts" => $request->block->contents->texts,
-                "photos" => $request->block->contents->photos,
+                "texts" => $request->texts,
+                "photos" => $request->photos,
             ]),
-            "order" => $request->block->order,
         ]);
 
         return response()->json($block);

@@ -11,13 +11,21 @@ export const AddText = () => {
     const addText = async () => {
         const activeBlock = findActiveBlock(blocks);
         if (activeBlock) {
-            $gotBlock = await updateBlockApi(activeBlock.value, {
-                mode: "text",
-                text: "text",
-                position: { x: 0, y: 0 },
-                rotate: 0,
-                fontSize: 16,
-                isBold: false,
+            const gotBlock = await updateBlockApi(activeBlock.value, "text", [
+                ...activeBlock.value.contents.texts,
+                {
+                    mode: "text",
+                    text: "text",
+                    position: { x: 0, y: 0 },
+                    rotate: 0,
+                    fontSize: 16,
+                    isBold: false,
+                },
+            ]);
+            setBlocks((prevBlocks) => {
+                prevBlocks[activeBlock.index] = gotBlock;
+                prevBlocks[activeBlock.index].active = true;
+                return [...prevBlocks];
             });
         }
     };
