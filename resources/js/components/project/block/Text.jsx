@@ -24,6 +24,7 @@ export const Text = ({
             index: index,
         });
     };
+
     const handleTouchEnd = async (e) => {
         e.stopPropagation();
         setBlocks((prevBlocks) => {
@@ -31,17 +32,8 @@ export const Text = ({
             console.log(prevBlocks);
             return [...prevBlocks];
         });
-
-        const gotBlock = await updateBlockApi(block, "text", [
-            ...block.contents.texts,
-        ]);
-        console.log(gotBlock);
     };
     const handleTouchMove = (e) => {
-        console.log(
-            e.changedTouches[0].clientY,
-            blockEl.current.getBoundingClientRect().top
-        );
         const blockRect = blockEl.current.getBoundingClientRect();
         setPosition({
             x: e.changedTouches[0].clientX - blockRect.left,
@@ -58,16 +50,39 @@ export const Text = ({
     }, []);
 
     const deleteText = async () => {
-        setSelectedItem({ ...selectedItem, mode: "" });
         setBlocks((prevBlocks) => {
             prevBlocks[blockIndex].contents.texts.splice(index, 1);
             return [...prevBlocks];
         });
-
-        // const gotBlock = await updateBlockApi(block, "text", [
-        //     ...block.contents.texts,
-        // ]);
+        setSelectedItem({ ...selectedItem, mode: "" });
     };
+    const handleChangeText = (e) => {
+        console.log(e.target.value);
+        setBlocks((prevBlocks) => {
+            prevBlocks[blockIndex].contents.texts[index].text = e.target.value;
+            return [...prevBlocks];
+        });
+    };
+
+    useEffect(() => {
+        if (
+            selectedItem.mode == "text" &&
+            selectedItem.blockIndex == blockIndex &&
+            selectedItem.index == index
+        ) {
+            const updateBlock = async () => {
+                const gotBlock = await updateBlockApi(
+                    blocks[blockIndex],
+                    "text",
+                    blocks[blockIndex].contents.texts
+                );
+            };
+            // 削除時のアップデートの処理を行うときsetStateがあとに処理をしてしまうため一時的にsetTimeoutで様子見
+            setTimeout(updateBlock, 100);
+            // updateBlock();
+        }
+    }, [blocks]);
+
     return (
         <div
             className={`${
@@ -95,16 +110,18 @@ export const Text = ({
             >
                 X
             </div>
-            <div
+            <input
                 style={{
                     fontSize: props.fontSize,
                     fontWeight: props.isBold ? "bold" : "normal",
                     color: props.color,
                     rotate: props.rotate + "deg",
+                    width: props.text.length * props.fontSize + "px",
                 }}
-            >
-                Text
-            </div>
+                className="bg-transparent block w-full"
+                value={props.text}
+                onInput={(e) => handleChangeText(e)}
+            ></input>
         </div>
     );
 };

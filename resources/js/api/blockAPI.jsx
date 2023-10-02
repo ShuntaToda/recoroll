@@ -46,10 +46,10 @@ export const addBlockApi = async (projectId, order) => {
 
 export const updateBlockApi = async (block, mode, props) => {
     try {
+        console.log(block, mode, props);
         const { data } = await axios.put(
             `/api/block/${block.id}`,
             {
-                block: block,
                 texts: mode == "text" ? props : block.contents.texts,
                 photos: mode == "photo" ? props : block.contents.photos,
             },
@@ -60,6 +60,7 @@ export const updateBlockApi = async (block, mode, props) => {
                 },
             }
         );
+        console.log(data);
         const [result] = exchangeContent([data]);
         console.log(result);
         return result;
