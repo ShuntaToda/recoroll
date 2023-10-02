@@ -5,9 +5,8 @@ import { blocksContext, setBlocksContext } from "../../provider/blocks";
 import { Block } from "./block/Block";
 import { BlockMenu } from "./block/BlockMenu";
 
-export const ProjectMain = () => {
+export const ProjectMain = ({ selectedItem, setSelectedItem }) => {
     const project = useContext(projectContext);
-    const setProject = useContext(setProjectContext);
     const blocks = useContext(blocksContext);
     const setBlocks = useContext(setBlocksContext);
 
@@ -46,6 +45,8 @@ export const ProjectMain = () => {
                     key={block.id}
                     block={block}
                     blockIndex={index}
+                    selectedItem={selectedItem}
+                    setSelectedItem={setSelectedItem}
                 ></Block>
             ))}
             <ProjectAddBlock

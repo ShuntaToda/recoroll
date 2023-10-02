@@ -18,8 +18,9 @@ export const AddText = () => {
                     text: "text",
                     position: { x: 0, y: 0 },
                     rotate: 0,
-                    fontSize: 16,
+                    fontSize: 30,
                     isBold: false,
+                    color: "#333333",
                 },
             ]);
             setBlocks((prevBlocks) => {

@@ -19,7 +19,11 @@ export const Project = () => {
     const setBlocks = useContext(setBlocksContext);
     const params = useParams();
     const { state } = useLocation();
-
+    const [selectedItem, setSelectedItem] = useState({
+        mode: "",
+        blockIndex: 0,
+        index: 0,
+    });
     // const createBlock = async () => {
     //     const createdBlock = await storeBlockApi(params.id, 1);
     //     return createdBlock;
@@ -50,8 +54,14 @@ export const Project = () => {
             {project && (
                 <div className="relative">
                     <ProjectHeader project={project}></ProjectHeader>
-                    <ProjectMain></ProjectMain>
-                    <ProjectFooter></ProjectFooter>
+                    <ProjectMain
+                        selectedItem={selectedItem}
+                        setSelectedItem={setSelectedItem}
+                    ></ProjectMain>
+                    <ProjectFooter
+                        selectedItem={selectedItem}
+                        setBlocks={setBlocks}
+                    ></ProjectFooter>
                 </div>
             )}
         </div>

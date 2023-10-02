@@ -10,26 +10,30 @@ export const Text = ({
     selectedItem,
     blockEl,
     blockIndex,
+    block,
 }) => {
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const blocks = useContext(blocksContext);
     const setBlocks = useContext(setBlocksContext);
 
-    const handleTouchStart = () => {
-        setSelectedItem({ mode: props.mode, index: index });
+    const handleTouchStart = (e) => {
+        e.stopPropagation();
+        setSelectedItem({
+            mode: props.mode,
+            blockIndex: blockIndex,
+            index: index,
+        });
     };
     const handleTouchEnd = async (e) => {
         e.stopPropagation();
-        const activeBlock = findActiveBlock(blocks);
         setBlocks((prevBlocks) => {
-            prevBlocks[activeBlock.index].contents.texts[index].position =
-                position;
+            prevBlocks[blockIndex].contents.texts[index].position = position;
             console.log(prevBlocks);
             return [...prevBlocks];
         });
 
-        const gotBlock = await updateBlockApi(activeBlock.value, "text", [
-            ...activeBlock.value.contents.texts,
+        const gotBlock = await updateBlockApi(block, "text", [
+            ...block.contents.texts,
         ]);
         console.log(gotBlock);
     };
@@ -52,19 +56,55 @@ export const Text = ({
             y: blocks[blockIndex].contents.texts[index].position.y,
         });
     }, []);
+
+    const deleteText = async () => {
+        setSelectedItem({ ...selectedItem, mode: "" });
+        setBlocks((prevBlocks) => {
+            prevBlocks[blockIndex].contents.texts.splice(index, 1);
+            return [...prevBlocks];
+        });
+
+        // const gotBlock = await updateBlockApi(block, "text", [
+        //     ...block.contents.texts,
+        // ]);
+    };
     return (
         <div
             className={`${
                 selectedItem.mode == "text" &&
                 selectedItem.index == index &&
+                selectedItem.blockIndex == blockIndex &&
                 "border-2"
             } p-3 absolute`}
             style={{ top: position.y, left: position.x }}
-            onTouchStart={handleTouchStart}
+            onTouchStart={(e) => handleTouchStart(e)}
             onTouchMove={(e) => handleTouchMove(e)}
             onTouchEnd={(e) => handleTouchEnd(e)}
         >
-            <div>Text</div>
+            <div
+                className="absolute -top-4 -left-4 text-red-600"
+                style={{
+                    display:
+                        selectedItem.mode == "text" &&
+                        selectedItem.index == index &&
+                        selectedItem.blockIndex == blockIndex
+                            ? "block"
+                            : "none",
+                }}
+                onClick={deleteText}
+            >
+                X
+            </div>
+            <div
+                style={{
+                    fontSize: props.fontSize,
+                    fontWeight: props.isBold ? "bold" : "normal",
+                    color: props.color,
+                    rotate: props.rotate + "deg",
+                }}
+            >
+                Text
+            </div>
         </div>
     );
 };

@@ -1,12 +1,17 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { blocksContext, setBlocksContext } from "../../../provider/blocks";
 import { Text } from "./Text";
-export const Block = ({ block, blockIndex, blockMenuOpen }) => {
+export const Block = ({
+    block,
+    blockIndex,
+    blockMenuOpen,
+    selectedItem,
+    setSelectedItem,
+}) => {
     const blocks = useContext(blocksContext);
     const setBlocks = useContext(setBlocksContext);
     const blockEl = useRef(null);
     const [isTouch, setIsTouch] = useState(false);
-    const [selectedItem, setSelectedItem] = useState({ mode: "", index: 0 });
 
     //長押しする際の処理
     const longTouch = (e) => {
@@ -14,6 +19,7 @@ export const Block = ({ block, blockIndex, blockMenuOpen }) => {
     };
     //タッチを開始したときの処理
     const touchStart = () => {
+        setSelectedItem({ mode: "", blockIndex: 0, index: 0 });
         //アクティブにする処理
         setBlocks((prevBlock) => {
             prevBlock = prevBlock.map((block) => ({ ...block, active: false }));
@@ -46,6 +52,7 @@ export const Block = ({ block, blockIndex, blockMenuOpen }) => {
                     index={index}
                     setSelectedItem={setSelectedItem}
                     selectedItem={selectedItem}
+                    block={block}
                     blockEl={blockEl}
                     blockIndex={blockIndex}
                 ></Text>

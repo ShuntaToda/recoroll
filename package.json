@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "query-string": "^8.1.0",
+        "react-color": "^2.19.3",
         "react-icons": "^4.10.1",
         "sass": "^1.63.6"
     }
