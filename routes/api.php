@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlockController;
 use App\Http\Controllers\OAuth\LoginController;
+use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,3 +40,6 @@ Route::get('/block/{project_id}', [BlockController::class, "index"])->middleware
 Route::post('/block/{project_id}', [BlockController::class, "store"])->middleware('auth:sanctum');
 Route::put('/block/{block_id}', [BlockController::class, "update"])->middleware('auth:sanctum');
 Route::delete('/block/{block_id}/{project_id}', [BlockController::class, "destroy"])->middleware('auth:sanctum');
+
+
+Route::post('/photo/{project_id}', [PhotoController::class, "store"])->middleware('auth:sanctum');
