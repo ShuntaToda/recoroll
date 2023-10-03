@@ -120,7 +120,7 @@ const TextMenu = ({ selectedItem }) => {
                                 selectedItem.index
                             ].color
                         }
-                        onChange={handleChangeColor}
+                        onChangeComplete={handleChangeColor}
                     ></HuePicker>
                 )}
             </div>
