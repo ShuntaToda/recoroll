@@ -11,7 +11,7 @@ export const ProjectHeader = ({ project }) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
         <div className="flex justify-between items-center relative bg-gradient-to-br to-yellow-400 from-orange-400">
-            <a href="/">
+            <a href="/" className="flex-grow">
                 <h1 className="py-2 px-3">
                     <img src={logo} className="w-28"></img>
                 </h1>
