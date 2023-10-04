@@ -12,7 +12,10 @@ export const PhotoMenu = ({
     return (
         <div>
             {isOpenPhotoMenu && (
-                <div className="w-full h-full bg-black opacity-10 fixed top-0 left-0"></div>
+                <div
+                    onClick={() => setIsOpenPhotoMenu(false)}
+                    className="w-full h-full bg-black opacity-20 transition-opacity fixed top-0 left-0"
+                ></div>
             )}
             <div
                 className={`w-full h-3/4 fixed bottom-0 bg-white transition-transform ${
