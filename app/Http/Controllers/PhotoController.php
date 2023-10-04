@@ -21,13 +21,14 @@ class PhotoController extends Controller
     public function store(Request $request, $project_id)
     {
 
-        $path = $request->file->store("public/photos");
-        return response()->json($path);
-        // $path = $request->file("image")->store("public/" . $project_id . "/photos");
+        // $path = $request->file->store("public/photos");
+        $path = $request->file->store("public/" . $project_id . "/photos");
+        $url = "/storage/" . $project_id . "/photos/" . basename($path);
+
         $photo = Photo::create([
             "project_id" => $project_id,
             "title" => $request->title,
-            "url" => $path,
+            "url" => $url,
         ]);
 
         return response()->json($photo);
