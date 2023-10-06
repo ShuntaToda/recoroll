@@ -43,3 +43,4 @@ Route::delete('/block/{block_id}/{project_id}', [BlockController::class, "destro
 
 
 Route::post('/photo/{project_id}', [PhotoController::class, "store"])->middleware('auth:sanctum');
+Route::get('/photo/{project_id}', [PhotoController::class, "index"])->middleware('auth:sanctum');

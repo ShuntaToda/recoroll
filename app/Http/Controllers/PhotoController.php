@@ -10,9 +10,11 @@ class PhotoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($project_id)
     {
-        //
+        $photos = Photo::where("project_id", $project_id)->get();
+
+        return response()->json($photos);
     }
 
     /**
